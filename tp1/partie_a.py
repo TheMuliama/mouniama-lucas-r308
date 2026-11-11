@@ -30,7 +30,7 @@ def charger_dict(d, fichier):
 
 # %%
 if __name__ == "__main__":
-    dict_etudiant = {
+    d = {
         "alice":float(12), 
         "bob":float(15),
         "Claire":float(9.5)
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
 print(d)
 
-print(f"moyenne_classe(d)    ->     {moyenne_classe(dict_etudiant)}")
+print(f"moyenne_classe(d)    ->     {moyenne_classe(d)}")
 print(f"meilleur_etudiant(d)(d)    ->     {meilleur_etudiant(d)}")
 
 
