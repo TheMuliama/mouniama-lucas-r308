@@ -46,3 +46,42 @@ class Utilisateur():
         for livre in self.emprunts:
             print(f"    {livre.titre} ({livre.annee}) par {livre.auteur}")
 # %%
+
+class Bibliotheque:
+    def __init__(self):
+        self.livres = {}
+        self.utilisateurs = {}
+
+    def ajouter_livre(self, livre):
+        if (not livre.titre in self.livres):
+            self.livres[livre.titre] = livre
+            return True
+        else:
+            return False
+            
+    def ajouter_utilisateur(self, utilisateur):
+        if (not utilisateur.nom in self.utilisateurs):
+            self.utilisateurs[utilisateur.nom] = utilisateur
+            return True
+        else:
+            return False
+
+    def emprunter(self, nom, titre):
+        # Vérification nom
+        if not nom in self.utilisateurs:
+            return "echec:uInconnu"
+
+        # Vérification titre
+        elif not titre in self.livres:
+            return "echec:lInconnu"
+
+        # Vérification livre non emprunté
+        elif not self.livres[titre].emprunteur == None:
+            return "echec:dejaEmprunte"
+
+        # Emprunt si nom et titre existant
+        else:
+            self.utilisateurs[nom].emprunter_livre(self.livres[titre])
+            return "reussite"
+
+# %%
