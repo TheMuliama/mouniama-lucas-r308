@@ -1,0 +1,3 @@
+alice:12.0
+bob:15.0
+Claire:9.5

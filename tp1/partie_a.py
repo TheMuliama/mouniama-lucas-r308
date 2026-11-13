@@ -1,6 +1,3 @@
-#%%
-import json
-
 # %%
 # Définition des fonctions
 
@@ -14,18 +11,48 @@ def meilleur_etudiant(d):
 def ajouter_etudiant(d, nom:str, note:float):
     d[nom] = note
 
-def enregistrer_dict(d, fichier):
-    
-    try:
-        with open(fichier, "w") as f:
-            json.dump(d, f, indent=4)
-    except:
-        print("Erreur: dictionnaire vide ou ligne mal formée")
+def enregistrer_dict(d:dict, fichier="tp1/fichier.txt"):
+    contenu = ""
 
-def charger_dict(d, fichier):
-     
-    with open(fichier, "r") as f:
-        d = json.load(f)
+    for nom in d.keys():
+        contenu += f"{nom}:{d.get(nom)}\n"
+
+    # Retirer le dernier saut de ligne
+    contenu = contenu[:-1]
+
+    
+
+    
+    with open(fichier, "w", encoding="utf-8") as f:
+        f.write(contenu)
+
+#%%
+def charger_dict(fichier="tp1/fichier.txt"):
+    d = {} 
+
+    try:
+        with open(fichier, "r", encoding="utf-8") as f:
+            contenu = f.read()
+    except:
+        return None
+    
+    lignes = contenu.split()
+
+    for ligne in lignes:
+        if len(ligne.split(":")) != 2:
+            continue
+
+        nom, note = ligne.split(":")
+
+        try:
+            note = float(note)
+        except:
+            continue
+
+        d[nom] = note
+
+    return d
+
 
 
 # %%
